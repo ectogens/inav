@@ -269,19 +269,32 @@ TARGET_SRC += $(MSC_SRC)
 endif
 
 ifneq ($(DSP_LIB),)
-
 INCLUDE_DIRS += $(DSP_LIB)/Include
 
 TARGET_SRC += $(DSP_LIB)/Source/BasicMathFunctions/arm_mult_f32.c
 TARGET_SRC += $(DSP_LIB)/Source/TransformFunctions/arm_rfft_fast_f32.c
 TARGET_SRC += $(DSP_LIB)/Source/TransformFunctions/arm_cfft_f32.c
+TARGET_SRC += $(DSP_LIB)/Source/TransformFunctions/arm_cfft_init_f32.c
 TARGET_SRC += $(DSP_LIB)/Source/TransformFunctions/arm_rfft_fast_init_f32.c
 TARGET_SRC += $(DSP_LIB)/Source/TransformFunctions/arm_cfft_radix8_f32.c
 TARGET_SRC += $(DSP_LIB)/Source/CommonTables/arm_common_tables.c
+TARGET_SRC += $(DSP_LIB)/Source/CommonTables/arm_const_structs.c
 TARGET_SRC += $(DSP_LIB)/Source/ComplexMathFunctions/arm_cmplx_mag_f32.c
 TARGET_SRC += $(DSP_LIB)/Source/StatisticsFunctions/arm_max_f32.c
 
 TARGET_SRC += $(wildcard $(DSP_LIB)/Source/*/*.S)
+endif
+
+ifneq ($(NN_LIB),)
+INCLUDE_DIRS += $(NN_LIB)/Include
+
+TARGET_SRC += $(NN_LIB)/Source/ActivationFunctions/arm_nn_activations_q15.c
+TARGET_SRC += $(NN_LIB)/Source/ActivationFunctions/arm_relu_q15.c
+TARGET_SRC += $(NN_LIB)/Source/FullyConnectedFunctions/arm_fully_connected_q15.c
+TARGET_SRC += $(NN_LIB)/Source/FullyConnectedFunctions/arm_fully_connected_q15_opt.c
+TARGET_SRC += $(NN_LIB)/Source/NNSupportFunctions/arm_nn_mult_q15.c
+TARGET_SRC += $(NN_LIB)/Source/NNSupportFunctions/arm_nntables.c
+TARGET_SRC += $(NN_LIB)/Source/SoftmaxFunctions/arm_softmax_q15.c
 endif
 
 # Search path and source files for the ST stdperiph library
